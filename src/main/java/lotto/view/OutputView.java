@@ -7,13 +7,17 @@ import java.util.List;
 
 public class OutputView {
 
-    public void printPurchasedLottos(PurchasedLottos purchasedLottos) {
-        List<Lotto> lottos = purchasedLottos.lottos();
-
+    public void printLottos(List<Lotto> lottos) {
         System.out.println();
-        System.out.printf("%d개를 구매했습니다.%n", lottos.size());
+        System.out.println(lottos.size() + "개를 구매했습니다.");
+
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.getNumbers());
+            printLotto(lotto);
         }
     }
+
+    private void printLotto(Lotto lotto) {
+        System.out.println(lotto.getNumbers());
+    }
+
 }
