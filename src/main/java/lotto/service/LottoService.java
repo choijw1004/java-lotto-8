@@ -12,7 +12,6 @@ public class LottoService {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
     private static final int LOTTO_PRICE = 1000;
-    private static final String DELIMITER = ",";
 
     public PurchasedLottos purchaseLottos(int amount) {
         validateAmount(amount);
@@ -46,29 +45,5 @@ public class LottoService {
     private Lotto generateLotto() {
         List<Integer> numbers = Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_SIZE);
         return new Lotto(numbers);
-    }
-
-    private List<Integer> parseNumbers(String input) {
-        String[] tokens = input.split(DELIMITER);
-        List<Integer> numbers = new ArrayList<>();
-
-        for (String token : tokens) {
-            try {
-                int number = Integer.parseInt(token.trim());
-                numbers.add(number);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("[ERROR] 당첨 번호는 숫자로 입력해야 합니다.");
-            }
-        }
-
-        return numbers;
-    }
-
-    private int parseBonusNumber(String input) {
-        try {
-            return Integer.parseInt(input.trim());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자로 입력해야 합니다.");
-        }
     }
 }
