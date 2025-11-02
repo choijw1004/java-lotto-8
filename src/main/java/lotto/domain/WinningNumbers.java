@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class WinningNumbers {
@@ -14,5 +15,14 @@ public class WinningNumbers {
 
         this.numbers = new ArrayList<>(numbers);
         this.bonusNumber = bonusNumber;
+
+    }
+
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(numbers);
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber;
     }
 }
