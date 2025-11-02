@@ -34,4 +34,8 @@ public class LottoService {
             );
         }
     }
+
+    private int calculateLottoCount(int amount) {
+        return amount / LOTTO_PRICE;
+    }
 }
