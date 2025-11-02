@@ -47,7 +47,7 @@ public class LottoController {
                 outputView.printLottos(purchasedLottos.lottos());
                 return purchasedLottos;
             } catch (IllegalArgumentException e) {
-                outputView.printError(e.getMessage());
+                outputView.printError("[ERROR] 구입 금액은 숫자로 입력해야 합니다.");
             }
         }
     }
@@ -63,7 +63,7 @@ public class LottoController {
 
                 return new WinningNumbers(numbers, bonusNumber);
             } catch (IllegalArgumentException e) {
-                outputView.printError(e.getMessage());
+                outputView.printError("[ERROR] 로또 번호는 숫자로 입력해야 합니다.");
             }
         }
     }
