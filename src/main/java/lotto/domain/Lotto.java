@@ -9,7 +9,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         LottoNumberValidator.validate(numbers);
-        this.numbers = new ArrayList<>();
+        this.numbers = new ArrayList<>(numbers);
     }
 
     /**
