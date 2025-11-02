@@ -2,8 +2,6 @@ package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import static java.lang.Integer.parseInt;
-
 public class InputView {
 
     public int readPurchaseAmount() {
@@ -14,4 +12,15 @@ public class InputView {
         return purchaseAmount;
     }
 
+    public String readWinningNumbers() {
+        System.out.println();
+        System.out.println("당첨 번호를 입력해 주세요.");
+        return Console.readLine();
+    }
+
+    public String readBonusNumberInput() {
+        System.out.println();
+        System.out.println("보너스 번호를 입력해 주세요.");
+        return Console.readLine();
+    }
 }
