@@ -1,8 +1,10 @@
 package lotto.dto;
 
-public record Statistics(MatchResult matchResult, double profitRate) {
+import java.util.List;
 
-    public static Statistics of(MatchResult matchResult, double profitRate) {
-        return new Statistics(matchResult, profitRate);
+public record Statistics(List<String> rankResults, double profitRate) {
+
+    public static Statistics of(List<String> rankResults, double profitRate) {
+        return new Statistics(rankResults, profitRate);
     }
 }

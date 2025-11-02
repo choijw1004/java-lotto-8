@@ -1,7 +1,7 @@
 package lotto.controller;
 
+import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
-import lotto.dto.MatchResult;
 import lotto.dto.PurchasedLottos;
 import lotto.dto.Statistics;
 import lotto.service.LottoMatchingService;
@@ -12,6 +12,7 @@ import lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LottoController {
 
@@ -33,10 +34,10 @@ public class LottoController {
         PurchasedLottos purchasedLottos = purchaseLottos();
         WinningNumbers winningNumbers = inputWinningNumbers();
 
-        MatchResult matchResult = lottoMatchingService.match(purchasedLottos, winningNumbers);
-        Statistics statistics = statisticsService.calculate(matchResult, getPurchaseAmount(purchasedLottos));
+        Map<Rank, Integer> rankCounts = lottoMatchingService.match(purchasedLottos, winningNumbers);
+        Statistics statistics = statisticsService.calculate(rankCounts, getPurchaseAmount(purchasedLottos));
 
-        outputView.printStatistics(statistics.matchResult().rankCounts(), statistics.profitRate());
+        outputView.printStatistics(statistics.rankResults(), statistics.profitRate());
     }
 
     private PurchasedLottos purchaseLottos() {
@@ -44,7 +45,7 @@ public class LottoController {
             try {
                 int amount = inputView.readPurchaseAmount();
                 PurchasedLottos purchasedLottos = lottoService.purchaseLottos(amount);
-                outputView.printLottos(purchasedLottos.lottos());
+                outputView.printLottos(purchasedLottos.numbers());
                 return purchasedLottos;
             } catch (IllegalArgumentException e) {
                 outputView.printError("[ERROR] 구입 금액은 숫자로 입력해야 합니다.");
@@ -69,7 +70,7 @@ public class LottoController {
     }
 
     private int getPurchaseAmount(PurchasedLottos purchasedLottos) {
-        return purchasedLottos.lottos().size() * 1000;
+        return purchasedLottos.numbers().size() * 1000;
     }
 
     private List<Integer> parseNumbers(String input) {

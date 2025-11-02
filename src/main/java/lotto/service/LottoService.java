@@ -17,12 +17,13 @@ public class LottoService {
         validateAmount(amount);
         int count = calculateLottoCount(amount);
 
-        List<Lotto> lottos = new ArrayList<>();
+        List<List<Integer>> lottosNumbers = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(generateLotto());
+            Lotto lotto = generateLotto();
+            lottosNumbers.add(lotto.getNumbers());
         }
 
-        return PurchasedLottos.from(lottos);
+        return PurchasedLottos.from(lottosNumbers);
     }
 
     private void validateAmount(int amount) {

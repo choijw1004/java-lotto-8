@@ -3,7 +3,6 @@ package lotto.service;
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
-import lotto.dto.MatchResult;
 import lotto.dto.PurchasedLottos;
 
 import java.util.HashMap;
@@ -14,15 +13,16 @@ public class LottoMatchingService {
     private static final int ZERO = 0;
     private static final int ONE = 1;
 
-    public MatchResult match(PurchasedLottos purchasedLottos, WinningNumbers winningNumbers) {
+    public Map<Rank, Integer> match(PurchasedLottos purchasedLottos, WinningNumbers winningNumbers) {
         Map<Rank, Integer> rankCounts = initializeRankCounts();
 
-        for (Lotto lotto : purchasedLottos.lottos()) {
+        for (List<Integer> lottoNumbers : purchasedLottos.numbers()) {
+            Lotto lotto = new Lotto(lottoNumbers);
             Rank rank = matchOne(lotto, winningNumbers);
             rankCounts.put(rank, rankCounts.get(rank) + ONE);
         }
 
-        return MatchResult.from(rankCounts);
+        return rankCounts;
     }
 
     private Map<Rank, Integer> initializeRankCounts() {
