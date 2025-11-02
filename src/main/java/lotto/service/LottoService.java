@@ -38,4 +38,9 @@ public class LottoService {
     private int calculateLottoCount(int amount) {
         return amount / LOTTO_PRICE;
     }
+
+    private Lotto generateLotto() {
+        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
+        return new Lotto(numbers);
+    }
 }
