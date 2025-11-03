@@ -82,6 +82,58 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @DisplayName("당첨 번호에 중복이 있을 때 예외")
+    @Test
+    void 당첨번호_중복_예외() {
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,3,4,5,5");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @DisplayName("당첨 번호 범위가 1~45를 벗어날 때 예외")
+    @Test
+    void 당첨번호_범위_예외() {
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,3,4,5,46");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @DisplayName("보너스 번호가 당첨 번호와 중복될 때 예외")
+    @Test
+    void 보너스번호_중복_예외() {
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,3,4,5,6", "6");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @DisplayName("보너스 번호 범위가 1~45를 벗어날 때 예외")
+    @Test
+    void 보너스번호_범위_예외() {
+        assertSimpleTest(() -> {
+            runException("1000", "1,2,3,4,5,6", "46");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @DisplayName("1등 당첨 테스트")
+    @Test
+    void 일등_당첨() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("1000", "1,2,3,4,5,6", "7");
+                    assertThat(output()).contains(
+                            "6개 일치 (2,000,000,000원) - 1개",
+                            "총 수익률은 200000000.0%입니다."
+                    );
+                },
+                List.of(1, 2, 3, 4, 5, 6)
+        );
+    }
+
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
