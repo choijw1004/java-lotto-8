@@ -13,7 +13,11 @@ public enum Rank {
     private final int prize;
     private final String message;
 
-    Rank(int matchCount, boolean hasBonus, int prize, String message) {
+    Rank(int matchCount,
+         boolean hasBonus,
+         int prize,
+         String message
+    ) {
         this.matchCount = matchCount;
         this.hasBonus = hasBonus;
         this.prize = prize;
@@ -29,7 +33,7 @@ public enum Rank {
             if (rank == NO_MATCH) {
                 continue;
             }
-            if (rank.matchCount == matchCount && rank.hasBonus == hasBonus) {
+            if (rank.matchCount == matchCount && rank.hasBonus) {
                 return rank;
             }
         }

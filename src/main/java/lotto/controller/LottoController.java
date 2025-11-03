@@ -22,7 +22,12 @@ public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
 
-    public LottoController(LottoService lottoService, LottoMatchingService lottoMatchingService, StatisticsService statisticsService, InputView inputView, OutputView outputView) {
+    public LottoController(LottoService lottoService,
+                           LottoMatchingService lottoMatchingService,
+                           StatisticsService statisticsService,
+                           InputView inputView,
+                           OutputView outputView
+    ) {
         this.lottoService = lottoService;
         this.lottoMatchingService = lottoMatchingService;
         this.statisticsService = statisticsService;
@@ -46,6 +51,7 @@ public class LottoController {
                 int amount = inputView.readPurchaseAmount();
                 PurchasedLottos purchasedLottos = lottoService.purchaseLottos(amount);
                 outputView.printLottos(purchasedLottos.numbers());
+                
                 return purchasedLottos;
             } catch (IllegalArgumentException e) {
                 outputView.printError("[ERROR] 구입 금액은 숫자로 입력해야 합니다.");
