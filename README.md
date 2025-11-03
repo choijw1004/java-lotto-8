@@ -109,32 +109,33 @@
 
 ---
 
-## 파일 구조 
+## 패키지 구조
 ```java
-└── java
-    └── lotto
-        ├── Application.java
-        ├── constants
-        │   ├── ErrorMessage.java
-        │   └── LottoConstants.java
-        ├── controller
-        │   └── LottoController.java
-        ├── domain
-        │   ├── Lotto.java
-        │   ├── LottoNumberValidator.java
-        │   ├── LottoParser.java
-        │   ├── Rank.java
-        │   └── WinningNumbers.java
-        ├── dto
-        │   ├── PurchasedLottos.java
-        │   └── Statistics.java
-        ├── service
-        │   ├── LottoMatchingService.java
-        │   ├── LottoService.java
-        │   └── StatisticsService.java
-        └── view
-            ├── InputView.java
-            └── OutputView.java
+.
+└── lotto
+    ├── Application.java
+    ├── constants
+    │   ├── ErrorMessage.java
+    │   ├── LottoConstants.java
+    │   └── ViewConstants.java
+    ├── controller
+    │   └── LottoController.java
+    ├── domain
+    │   ├── Lotto.java
+    │   ├── LottoNumberValidator.java
+    │   ├── LottoParser.java
+    │   ├── Rank.java
+    │   └── WinningNumbers.java
+    ├── dto
+    │   ├── PurchasedLottos.java
+    │   └── Statistics.java
+    ├── service
+    │   ├── LottoMatchingService.java
+    │   ├── LottoService.java
+    │   └── StatisticsService.java
+    └── view
+        ├── InputView.java
+        └── OutputView.java
 ```
 --- 
 ## 클래스 다이어그램 
