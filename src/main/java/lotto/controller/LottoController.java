@@ -12,6 +12,9 @@ import lotto.view.OutputView;
 
 import java.util.Map;
 
+import static lotto.constants.ErrorMessage.INVALID_LOTTO_NUMBER_FORMAT;
+import static lotto.constants.ErrorMessage.INVALID_PURCHASE_AMOUNT_FORMAT;
+
 public class LottoController {
 
     private final LottoService lottoService;
@@ -52,7 +55,7 @@ public class LottoController {
 
                 return purchasedLottos;
             } catch (IllegalArgumentException e) {
-                outputView.printError("[ERROR] 구입 금액은 숫자로 입력해야 합니다.");
+                outputView.printError(INVALID_PURCHASE_AMOUNT_FORMAT);
             }
         }
     }
@@ -66,7 +69,7 @@ public class LottoController {
 
                 return lottoService.createWinningNumbers(numbersInput,bonusInput);
             } catch (IllegalArgumentException e) {
-                outputView.printError("[ERROR] 로또 번호는 숫자로 입력해야 합니다.");
+                outputView.printError(INVALID_LOTTO_NUMBER_FORMAT);
             }
         }
     }
