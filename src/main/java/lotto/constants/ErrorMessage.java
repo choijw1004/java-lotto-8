@@ -1,7 +1,6 @@
 package lotto.constants;
 
-public class ErrorMessage {
-
+public final class ErrorMessage {
     private ErrorMessage() {
     }
 

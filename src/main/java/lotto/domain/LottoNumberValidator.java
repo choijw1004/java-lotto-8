@@ -7,8 +7,8 @@ import java.util.Set;
 import static lotto.constants.ErrorMessage.*;
 import static lotto.constants.LottoConstants.*;
 
-public class LottoNumberValidator {
-
+public final class LottoNumberValidator {
+    // 인스턴스화 방지
     private LottoNumberValidator() {
     }
 

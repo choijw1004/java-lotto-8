@@ -1,6 +1,7 @@
 package lotto.constants;
 
-public class LottoConstants {
+public final class LottoConstants {
+    // 인스턴스화 방지
     private LottoConstants() {
     }
 
