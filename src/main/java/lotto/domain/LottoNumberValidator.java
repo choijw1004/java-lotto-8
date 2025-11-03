@@ -56,4 +56,17 @@ public final class LottoNumberValidator {
             throw new IllegalArgumentException(INVALID_BONUS_NUMBER_DUPLICATE);
         }
     }
+
+    public static void validatePriceAmount(int amount) {
+        if (amount < LOTTO_PRICE) {
+            throw new IllegalArgumentException(
+                    INVALID_PURCHASE_AMOUNT_MIN_PREFIX + LOTTO_PRICE + INVALID_PURCHASE_AMOUNT_MIN_SUFFIX
+            );
+        }
+        if (amount % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException(
+                    INVALID_PURCHASE_AMOUNT_UNIT_PREFIX + LOTTO_PRICE + INVALID_PURCHASE_AMOUNT_UNIT_SUFFIX
+            );
+        }
+    }
 }

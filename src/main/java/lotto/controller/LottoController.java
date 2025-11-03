@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import lotto.domain.LottoNumberValidator;
+import lotto.domain.LottoParser;
 import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
 import lotto.dto.PurchasedLottos;
@@ -10,6 +12,7 @@ import lotto.service.StatisticsService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
 import java.util.Map;
 
 import static lotto.constants.ErrorMessage.INVALID_LOTTO_NUMBER_FORMAT;
@@ -57,6 +60,7 @@ public class LottoController {
         while (true) {
             try {
                 int amount = inputView.readPurchaseAmount();
+                LottoNumberValidator.validatePriceAmount(amount);
                 PurchasedLottos purchasedLottos = lottoService.purchaseLottos(amount);
                 outputView.printLottos(purchasedLottos.numbers());
 
@@ -77,9 +81,14 @@ public class LottoController {
         while (true) {
             try {
                 String numbersInput = inputView.readWinningNumbers();
-                String bonusInput = inputView.readBonusNumber();
+                List<Integer> numbers = LottoParser.parseNumbers(numbersInput);
+                LottoNumberValidator.validate(numbers);
 
-                return lottoService.createWinningNumbers(numbersInput, bonusInput);
+                String numberInput = inputView.readBonusNumber();
+                int bonusNumber = LottoParser.parseBonusNumber(numberInput);
+                LottoNumberValidator.validate(bonusNumber);
+
+                return lottoService.createWinningNumbers(numbers, bonusNumber);
             } catch (IllegalArgumentException e) {
                 outputView.printError(INVALID_LOTTO_NUMBER_FORMAT);
             }

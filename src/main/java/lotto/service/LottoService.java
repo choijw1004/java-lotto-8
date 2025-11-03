@@ -22,7 +22,6 @@ public class LottoService {
      * @return 발행된 로또 목록
      */
     public PurchasedLottos purchaseLottos(int amount) {
-        validateAmount(amount);
         int count = calculateLottoCount(amount);
 
         List<List<Integer>> lottosNumbers = IntStream.range(0, count)
@@ -35,14 +34,11 @@ public class LottoService {
     /**
      * 입력받은 문자열로 당첨 번호 객체를 생성
      *
-     * @param numbersInput 당첨 번호 문자열
-     * @param bonusInput   보너스 번호 문자열
+     * @param numbers 당첨 번호 리스트
+     * @param bonusNumber   보너스 번호
      * @return 당첨 번호 객체
      */
-    public WinningNumbers createWinningNumbers(String numbersInput, String bonusInput) {
-        List<Integer> numbers = parseNumbers(numbersInput);
-        int bonusNumber = parseBonusNumber(bonusInput);
-
+    public WinningNumbers createWinningNumbers(List<Integer> numbers, int bonusNumber) {
         return new WinningNumbers(numbers, bonusNumber);
     }
 
@@ -66,27 +62,5 @@ public class LottoService {
     private Lotto generateLotto() {
         List<Integer> numbers = Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_SIZE);
         return new Lotto(numbers);
-    }
-
-    private List<Integer> parseNumbers(String input) {
-        List<Integer> numbers = Arrays.stream(input.split(DELEMITER))
-                .map(String::trim)
-                .map(token -> {
-                    try {
-                        return Integer.parseInt(token);
-                    } catch (NumberFormatException e) {
-                        throw new IllegalArgumentException(INVALID_WINNING_NUMBER_FORMAT);
-                    }
-                })
-                .toList();
-        return numbers;
-    }
-
-    private int parseBonusNumber(String input) {
-        try {
-            return Integer.parseInt(input.trim());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_BONUS_NUMBER_FORMAT);
-        }
     }
 }
