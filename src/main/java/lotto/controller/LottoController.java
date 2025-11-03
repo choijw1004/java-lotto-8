@@ -40,7 +40,7 @@ public class LottoController {
         WinningNumbers winningNumbers = inputWinningNumbers();
 
         Map<Rank, Integer> rankCounts = lottoMatchingService.match(purchasedLottos, winningNumbers);
-        Statistics statistics = statisticsService.calculate(rankCounts, getPurchaseAmount(purchasedLottos));
+        Statistics statistics = statisticsService.calculate(rankCounts, purchasedLottos.calculateTotalAmount());
 
         outputView.printStatistics(statistics.rankResults(), statistics.profitRate());
     }
@@ -51,7 +51,7 @@ public class LottoController {
                 int amount = inputView.readPurchaseAmount();
                 PurchasedLottos purchasedLottos = lottoService.purchaseLottos(amount);
                 outputView.printLottos(purchasedLottos.numbers());
-                
+
                 return purchasedLottos;
             } catch (IllegalArgumentException e) {
                 outputView.printError("[ERROR] 구입 금액은 숫자로 입력해야 합니다.");
@@ -73,10 +73,6 @@ public class LottoController {
                 outputView.printError("[ERROR] 로또 번호는 숫자로 입력해야 합니다.");
             }
         }
-    }
-
-    private int getPurchaseAmount(PurchasedLottos purchasedLottos) {
-        return purchasedLottos.numbers().size() * 1000;
     }
 
     private List<Integer> parseNumbers(String input) {
