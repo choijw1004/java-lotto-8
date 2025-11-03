@@ -3,9 +3,7 @@ package lotto.service;
 import lotto.domain.Rank;
 import lotto.dto.Statistics;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class StatisticsService {
 
@@ -40,17 +38,15 @@ public class StatisticsService {
     }
 
     private List<String> formatRankResults(Map<Rank, Integer> rankCounts) {
-        List<String> results = new ArrayList<>();
-
-        for (Rank rank : Rank.values()) {
-            if (rank.isWinning()) {
-                int count = rankCounts.getOrDefault(rank, 0);
-                String prize = formatPrize(rank.getPrize());
-                results.add(rank.getMessage() + " (" + prize + ") - " + count + "개");
-            }
-        }
-
-        return results;
+        return Arrays.stream(Rank.values())
+                .filter(Rank::isWinning)
+                .sorted(Comparator.comparingInt(Rank::getPrize))
+                .map(rank -> {
+                    int count = rankCounts.getOrDefault(rank, 0);
+                    String prize = formatPrize(rank.getPrize());
+                    return rank.getMessage() + " (" + prize + ") - " + count + "개";
+                })
+                .toList();
     }
 
     private String formatPrize(int prize) {
