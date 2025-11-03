@@ -43,14 +43,9 @@ public class LottoMatchingService {
         List<Integer> lottoNumbers = lotto.getNumbers();
         List<Integer> winningNumbersList = winningNumbers.getNumbers();
 
-        int count = 0;
-
-        for (int lottoNumber : lottoNumbers) {
-            if (winningNumbersList.contains(lottoNumber)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) lottoNumbers.stream()
+                .filter(winningNumbersList::contains)
+                .count();
     }
 
     private boolean checkBonus(Lotto lotto, WinningNumbers winningNumbers) {

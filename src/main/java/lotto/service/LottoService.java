@@ -5,8 +5,9 @@ import lotto.domain.Lotto;
 import lotto.domain.WinningNumbers;
 import lotto.dto.PurchasedLottos;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static lotto.constants.ErrorMessage.*;
 import static lotto.constants.LottoConstants.*;
@@ -18,11 +19,9 @@ public class LottoService {
         validateAmount(amount);
         int count = calculateLottoCount(amount);
 
-        List<List<Integer>> lottosNumbers = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            Lotto lotto = generateLotto();
-            lottosNumbers.add(lotto.getNumbers());
-        }
+        List<List<Integer>> lottosNumbers = IntStream.range(0, count)
+                .mapToObj(i -> generateLotto().getNumbers())
+                .toList();
 
         return PurchasedLottos.from(lottosNumbers);
     }
@@ -57,17 +56,16 @@ public class LottoService {
     }
 
     private List<Integer> parseNumbers(String input) {
-        String[] tokens = input.split(DELEMITER);
-        List<Integer> numbers = new ArrayList<>();
-
-        for (String token : tokens) {
-            try {
-                numbers.add(Integer.parseInt(token.trim()));
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException(INVALID_WINNING_NUMBER_FORMAT);
-            }
-        }
-
+        List<Integer> numbers = Arrays.stream(input.split(DELEMITER))
+                .map(String::trim)
+                .map(token -> {
+                    try {
+                        return Integer.parseInt(token);
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException(INVALID_WINNING_NUMBER_FORMAT);
+                    }
+                })
+                .toList();
         return numbers;
     }
 
