@@ -15,7 +15,7 @@ public class StatisticsService {
      * @return 통계 결과 (출력용 문자열 리스트 + 수익률)
      */
     public Statistics calculate(Map<Rank, Integer> rankCounts, int purchaseAmount) {
-        int totalPrize = calculateTotalPrize(rankCounts);
+        long totalPrize = calculateTotalPrize(rankCounts);
         double profitRate = calculateProfitRate(totalPrize, purchaseAmount);
 
         List<String> rankResults = formatRankResults(rankCounts);
@@ -23,17 +23,17 @@ public class StatisticsService {
         return Statistics.of(rankResults, profitRate);
     }
 
-    private int calculateTotalPrize(Map<Rank, Integer> rankCounts) {
-        int total = 0;
+    private long calculateTotalPrize(Map<Rank, Integer> rankCounts) {
+        long total = 0;
 
         for (Map.Entry<Rank, Integer> entry : rankCounts.entrySet()) {
-            total += entry.getKey().getPrize() * entry.getValue();
+            total += (long)entry.getKey().getPrize() * entry.getValue();
         }
 
         return total;
     }
 
-    private double calculateProfitRate(int totalPrize, int purchaseAmount) {
+    private double calculateProfitRate(long totalPrize, int purchaseAmount) {
         return ((double) totalPrize / purchaseAmount) * 100;
     }
 
