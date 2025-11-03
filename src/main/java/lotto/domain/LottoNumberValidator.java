@@ -7,6 +7,9 @@ import java.util.Set;
 import static lotto.constants.ErrorMessage.*;
 import static lotto.constants.LottoConstants.*;
 
+/**
+ * 로또 번호에 대한 검증을 제공하는 클래스.
+ */
 public final class LottoNumberValidator {
     // 인스턴스화 방지
     private LottoNumberValidator() {

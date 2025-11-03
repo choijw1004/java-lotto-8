@@ -9,6 +9,13 @@ import java.util.Map;
 
 public class StatisticsService {
 
+    /**
+     * 당첨 통계와 수익률을 계산
+     *
+     * @param rankCounts     등수별 당첨 개수
+     * @param purchaseAmount 구입 금액
+     * @return 통계 결과 (출력용 문자열 리스트 + 수익률)
+     */
     public Statistics calculate(Map<Rank, Integer> rankCounts, int purchaseAmount) {
         int totalPrize = calculateTotalPrize(rankCounts);
         double profitRate = calculateProfitRate(totalPrize, purchaseAmount);

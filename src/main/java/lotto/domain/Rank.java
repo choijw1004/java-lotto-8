@@ -24,6 +24,13 @@ public enum Rank {
         this.message = message;
     }
 
+    /**
+     * 일치 개수와 보너스 일치 여부로 등수를 결정
+     *
+     * @param matchCount 일치한 번호 개수
+     * @param hasBonus   보너스 번호 일치 여부
+     * @return 해당하는 등수 (Rank)
+     */
     public static Rank of(int matchCount, boolean hasBonus) {
         if (matchCount < MATCH_3.matchCount) {
             return NO_MATCH;
@@ -41,6 +48,13 @@ public enum Rank {
         return findByMatchCount(matchCount);
     }
 
+    /**
+     * 보너스 일치 여부와 관계없이 일치 개수만으로 등수를 찾음
+     * 5개 일치 시 보너스가 없는 경우(3등)를 찾기 위해 사용
+     *
+     * @param matchCount 일치한 번호 개수
+     * @return 해당하는 등수 (Rank)
+     */
     private static Rank findByMatchCount(int matchCount) {
         for (Rank rank : values()) {
             if (rank.matchCount == matchCount && !rank.hasBonus) {

@@ -15,6 +15,12 @@ import static lotto.constants.LottoConstants.*;
 
 public class LottoService {
 
+    /**
+     * 구입 금액에 해당하는 개수만큼 로또를 발행
+     *
+     * @param amount 구입 금액
+     * @return 발행된 로또 목록
+     */
     public PurchasedLottos purchaseLottos(int amount) {
         validateAmount(amount);
         int count = calculateLottoCount(amount);
@@ -26,6 +32,13 @@ public class LottoService {
         return PurchasedLottos.from(lottosNumbers);
     }
 
+    /**
+     * 입력받은 문자열로 당첨 번호 객체를 생성
+     *
+     * @param numbersInput 당첨 번호 문자열
+     * @param bonusInput   보너스 번호 문자열
+     * @return 당첨 번호 객체
+     */
     public WinningNumbers createWinningNumbers(String numbersInput, String bonusInput) {
         List<Integer> numbers = parseNumbers(numbersInput);
         int bonusNumber = parseBonusNumber(bonusInput);

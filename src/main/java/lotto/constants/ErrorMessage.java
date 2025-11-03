@@ -1,6 +1,10 @@
 package lotto.constants;
 
+/**
+ * 전역에서 사용하는 에러 메시지를 정의한 클래스
+ */
 public final class ErrorMessage {
+    //인스턴스화 방지
     private ErrorMessage() {
     }
 

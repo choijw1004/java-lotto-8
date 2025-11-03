@@ -18,6 +18,11 @@ public class WinningNumbers {
 
     }
 
+    /**
+     * 당첨 번호 리스트를 외부에서 수정할 수 없도록 반환하는 메서드
+     *
+     * @return 당첨 번호의 불변 리스트
+     */
     public List<Integer> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
