@@ -52,7 +52,7 @@ public class LottoService {
     }
 
     private Lotto generateLotto() {
-        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MIN_LOTTO_NUMBER, LOTTO_SIZE);
+        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER, LOTTO_SIZE);
         return new Lotto(numbers);
     }
 
