@@ -40,7 +40,7 @@ public enum Rank {
             if (rank == NO_MATCH) {
                 continue;
             }
-            if (rank.matchCount == matchCount && rank.hasBonus) {
+            if (rank.matchCount == matchCount && rank.hasBonus == hasBonus) {
                 return rank;
             }
         }
