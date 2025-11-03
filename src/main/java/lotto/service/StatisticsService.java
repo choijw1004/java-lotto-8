@@ -37,6 +37,13 @@ public class StatisticsService {
         return ((double) totalPrize / purchaseAmount) * 100;
     }
 
+    /**
+     * 등수별 결과를 출력용 문자열 리스트로 변환
+     * 5등(낮은 상금)부터 1등(높은 상금) 순서로 정렬하여 반환
+     *
+     * @param rankCounts 등수별 당첨 개수
+     * @return 출력용 문자열 리스트
+     */
     private List<String> formatRankResults(Map<Rank, Integer> rankCounts) {
         return Arrays.stream(Rank.values())
                 .filter(Rank::isWinning)
