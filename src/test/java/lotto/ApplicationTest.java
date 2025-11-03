@@ -196,6 +196,25 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @DisplayName("정렬되지 않은 당첨 번호로 당첨 확인")
+    @Test
+    void 정렬되지_않은_당첨번호() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("3000", "45,3,22,1,15,30", "7");
+                    assertThat(output()).contains(
+                            "3개를 구매했습니다.",
+                            "3개 일치 (5,000원) - 1개",
+                            "4개 일치 (50,000원) - 1개",
+                            "5개 일치 (1,500,000원) - 1개"
+                    );
+                },
+                List.of(45, 3, 22, 1, 15, 10),
+                List.of(30, 1, 22, 3, 10, 11),
+                List.of(15, 1, 45, 10, 11, 12)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
