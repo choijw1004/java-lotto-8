@@ -67,7 +67,7 @@ public class LottoController {
                 String numbersInput = inputView.readWinningNumbers();
                 String bonusInput = inputView.readBonusNumber();
 
-                return lottoService.createWinningNumbers(numbersInput,bonusInput);
+                return lottoService.createWinningNumbers(numbersInput, bonusInput);
             } catch (IllegalArgumentException e) {
                 outputView.printError(INVALID_LOTTO_NUMBER_FORMAT);
             }
