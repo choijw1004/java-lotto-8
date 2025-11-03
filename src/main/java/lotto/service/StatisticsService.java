@@ -27,7 +27,7 @@ public class StatisticsService {
         long total = 0;
 
         for (Map.Entry<Rank, Integer> entry : rankCounts.entrySet()) {
-            total += (long)entry.getKey().getPrize() * entry.getValue();
+            total += (long) entry.getKey().getPrize() * entry.getValue();
         }
 
         return total;

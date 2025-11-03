@@ -5,11 +5,9 @@ import lotto.domain.Lotto;
 import lotto.domain.WinningNumbers;
 import lotto.dto.PurchasedLottos;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static lotto.constants.ErrorMessage.*;
 import static lotto.constants.LottoConstants.*;
 
 
@@ -34,25 +32,12 @@ public class LottoService {
     /**
      * 입력받은 문자열로 당첨 번호 객체를 생성
      *
-     * @param numbers 당첨 번호 리스트
-     * @param bonusNumber   보너스 번호
+     * @param numbers     당첨 번호 리스트
+     * @param bonusNumber 보너스 번호
      * @return 당첨 번호 객체
      */
     public WinningNumbers createWinningNumbers(List<Integer> numbers, int bonusNumber) {
         return new WinningNumbers(numbers, bonusNumber);
-    }
-
-    private void validateAmount(int amount) {
-        if (amount < LOTTO_PRICE) {
-            throw new IllegalArgumentException(
-                    INVALID_PURCHASE_AMOUNT_MIN_PREFIX + LOTTO_PRICE + INVALID_PURCHASE_AMOUNT_MIN_SUFFIX
-            );
-        }
-        if (amount % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(
-                    INVALID_PURCHASE_AMOUNT_UNIT_PREFIX + LOTTO_PRICE + INVALID_PURCHASE_AMOUNT_UNIT_SUFFIX
-            );
-        }
     }
 
     private int calculateLottoCount(int amount) {
