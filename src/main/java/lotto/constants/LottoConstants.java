@@ -19,5 +19,7 @@ public final class LottoConstants {
     // 구분자 관련
     public static final String DELEMITER = ",";
 
-    //
+    // 포맷 관련
+    public static final String RANK_RESULT_FORMAT = "%s (%s) - %d개";
+    public static final String PRIZE_FORMAT = "%,d원";
 }

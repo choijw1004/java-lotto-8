@@ -5,8 +5,8 @@ import lotto.dto.Statistics;
 
 import java.util.*;
 
-import static lotto.constants.ViewConstants.PRIZE_FORMAT;
-import static lotto.constants.ViewConstants.RANK_RESULT_FORMAT;
+import static lotto.constants.LottoConstants.PRIZE_FORMAT;
+import static lotto.constants.LottoConstants.RANK_RESULT_FORMAT;
 
 public class StatisticsService {
 

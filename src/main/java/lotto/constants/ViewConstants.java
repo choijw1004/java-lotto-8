@@ -20,8 +20,4 @@ public final class ViewConstants {
     // 출력 포맷
     public static final String PURCHASE_COUNT_FORMAT = "%d개를 구매했습니다.";
     public static final String PROFIT_RATE_FORMAT = "총 수익률은 %.1f%%입니다.%n";
-
-    // 포맷 관련
-    public static final String RANK_RESULT_FORMAT = "%s (%s) - %d개";
-    public static final String PRIZE_FORMAT = "%,d원";
 }
