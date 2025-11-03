@@ -9,14 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static lotto.constants.ErrorMessage.*;
+import static lotto.constants.LottoConstants.*;
 
 
 public class LottoService {
-    private static final int LOTTO_SIZE = 6;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
-    private static final int LOTTO_PRICE = 1000;
-    private static final String DELEMITER = ",";
 
     public PurchasedLottos purchaseLottos(int amount) {
         validateAmount(amount);
@@ -56,7 +52,7 @@ public class LottoService {
     }
 
     private Lotto generateLotto() {
-        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_SIZE);
+        List<Integer> numbers = Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MIN_LOTTO_NUMBER, LOTTO_SIZE);
         return new Lotto(numbers);
     }
 

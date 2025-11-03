@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoMatchingService {
-    private static final int ZERO = 0;
-    private static final int ONE = 1;
 
     public Map<Rank, Integer> match(PurchasedLottos purchasedLottos, WinningNumbers winningNumbers) {
         Map<Rank, Integer> rankCounts = initializeRankCounts();
@@ -19,7 +17,7 @@ public class LottoMatchingService {
         for (List<Integer> lottoNumbers : purchasedLottos.numbers()) {
             Lotto lotto = new Lotto(lottoNumbers);
             Rank rank = matchOne(lotto, winningNumbers);
-            rankCounts.put(rank, rankCounts.get(rank) + ONE);
+            rankCounts.put(rank, rankCounts.get(rank) + 1);
         }
 
         return rankCounts;
@@ -29,7 +27,7 @@ public class LottoMatchingService {
         Map<Rank, Integer> rankCounts = new HashMap<>();
 
         for (Rank rank : Rank.values()) {
-            rankCounts.put(rank, ZERO);
+            rankCounts.put(rank, 0);
         }
 
         return rankCounts;

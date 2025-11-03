@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class StatisticsService {
-    private static final int ZERO = 0;
 
     public Statistics calculate(Map<Rank, Integer> rankCounts, int purchaseAmount) {
         int totalPrize = calculateTotalPrize(rankCounts);
@@ -20,7 +19,7 @@ public class StatisticsService {
     }
 
     private int calculateTotalPrize(Map<Rank, Integer> rankCounts) {
-        int total = ZERO;
+        int total = 0;
 
         for (Map.Entry<Rank, Integer> entry : rankCounts.entrySet()) {
             total += entry.getKey().getPrize() * entry.getValue();

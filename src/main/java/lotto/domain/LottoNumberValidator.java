@@ -5,11 +5,9 @@ import java.util.List;
 import java.util.Set;
 
 import static lotto.constants.ErrorMessage.*;
+import static lotto.constants.LottoConstants.*;
 
 public class LottoNumberValidator {
-    private static final int LOTTO_SIZE = 6;
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
 
     private LottoNumberValidator() {
     }
@@ -25,7 +23,7 @@ public class LottoNumberValidator {
     }
 
     public static void validateNumber(int number) {
-        if (number < MIN_NUMBER || number > MAX_NUMBER) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE);
         }
     }
