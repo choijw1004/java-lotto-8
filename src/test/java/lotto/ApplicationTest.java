@@ -133,6 +133,68 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @DisplayName("2등 당첨 테스트 - 5개 일치 + 보너스")
+    @Test
+    void 이등_당첨() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("1000", "1,2,3,4,5,6", "7");
+                    assertThat(output()).contains(
+                            "5개 일치, 보너스 볼 일치 (30,000,000원) - 1개",
+                            "총 수익률은 3000000.0%입니다."
+                    );
+                },
+                List.of(1, 2, 3, 4, 5, 7)
+        );
+    }
+
+    @DisplayName("3등 당첨 테스트 - 5개 일치")
+    @Test
+    void 삼등_당첨() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("1000", "1,2,3,4,5,6", "7");
+                    assertThat(output()).contains(
+                            "5개 일치 (1,500,000원) - 1개",
+                            "총 수익률은 150000.0%입니다."
+                    );
+                },
+                List.of(1, 2, 3, 4, 5, 8)
+        );
+    }
+
+    @DisplayName("낙첨 테스트")
+    @Test
+    void 낙첨() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("1000", "1,2,3,4,5,6", "7");
+                    assertThat(output()).contains(
+                            "총 수익률은 0.0%입니다."
+                    );
+                },
+                List.of(10, 11, 12, 13, 14, 15)
+        );
+    }
+
+    @DisplayName("여러 로또 구매 및 혼합 당첨")
+    @Test
+    void 여러_로또_혼합당첨() {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run("3000", "1,2,3,4,5,6", "7");
+                    assertThat(output()).contains(
+                            "3개를 구매했습니다.",
+                            "5개 일치 (1,500,000원) - 1개",
+                            "4개 일치 (50,000원) - 1개",
+                            "3개 일치 (5,000원) - 1개"
+                    );
+                },
+                List.of(1, 2, 3, 4, 5, 10),  // 5개 일치 (3등)
+                List.of(1, 2, 3, 4, 10, 11), // 4개 일치 (4등)
+                List.of(1, 2, 3, 10, 11, 12) // 3개 일치 (5등)
+        );
+    }
 
     @Override
     public void runMain() {
