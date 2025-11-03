@@ -10,8 +10,6 @@ import lotto.service.StatisticsService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class LottoController {
@@ -65,28 +63,11 @@ public class LottoController {
             try {
                 String numbersInput = inputView.readWinningNumbers();
                 String bonusInput = inputView.readBonusNumberInput();
-                List<Integer> numbers = parseNumbers(numbersInput);
-                int bonusNumber = parseBonusNumber(bonusInput);
 
-                return new WinningNumbers(numbers, bonusNumber);
+                return lottoService.createWinningNumbers(numbersInput,bonusInput);
             } catch (IllegalArgumentException e) {
                 outputView.printError("[ERROR] 로또 번호는 숫자로 입력해야 합니다.");
             }
         }
-    }
-
-    private List<Integer> parseNumbers(String input) {
-        String[] tokens = input.split(",");
-        List<Integer> numbers = new ArrayList<>();
-
-        for (String token : tokens) {
-            numbers.add(Integer.parseInt(token.trim()));
-        }
-
-        return numbers;
-    }
-
-    private int parseBonusNumber(String input) {
-        return Integer.parseInt(input.trim());
     }
 }
