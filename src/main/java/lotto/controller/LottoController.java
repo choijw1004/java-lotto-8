@@ -62,7 +62,7 @@ public class LottoController {
         while (true) {
             try {
                 String numbersInput = inputView.readWinningNumbers();
-                String bonusInput = inputView.readBonusNumberInput();
+                String bonusInput = inputView.readBonusNumber();
 
                 return lottoService.createWinningNumbers(numbersInput,bonusInput);
             } catch (IllegalArgumentException e) {
