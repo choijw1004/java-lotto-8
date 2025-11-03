@@ -18,4 +18,6 @@ public final class LottoConstants {
 
     // 구분자 관련
     public static final String DELEMITER = ",";
+
+    //
 }

@@ -5,6 +5,9 @@ import lotto.dto.Statistics;
 
 import java.util.*;
 
+import static lotto.constants.ViewConstants.PRIZE_FORMAT;
+import static lotto.constants.ViewConstants.RANK_RESULT_FORMAT;
+
 public class StatisticsService {
 
     /**
@@ -51,12 +54,15 @@ public class StatisticsService {
                 .map(rank -> {
                     int count = rankCounts.getOrDefault(rank, 0);
                     String prize = formatPrize(rank.getPrize());
-                    return rank.getMessage() + " (" + prize + ") - " + count + "개";
+                    return String.format(RANK_RESULT_FORMAT,
+                            rank.getMessage(),
+                            prize,
+                            count);
                 })
                 .toList();
     }
 
     private String formatPrize(int prize) {
-        return String.format("%,d원", prize);
+        return String.format(PRIZE_FORMAT, prize);
     }
 }
